@@ -1,14 +1,19 @@
 -- Retribution
 -- Notes:
 -- Page Types: 0 - Continue / 1 - Yes or No / 2 - Item Get / 3 - Item Jump / 4 - Jump / 5 - Item Count Jump (Unused) / 6 - Ending / 7 - ???
--- Items: 0 - Rope / 1 - Sword / 2 - Time / 3 - Platinum Drive / 4 - Dagger / 5 - Twarsmyier
+-- Items: 0 - Rope / 1 - Sword / 2 - Time / 3 - Platinum Drive / 4 - Dagger / 5 - Twarsmyier / 6 - 
 
 function love.load()
  p={}
- p.room=0
  p.stars=0
  p.stuff={}
 
+ ending=false
+ platenddone=false
+ endingtimer=0
+ endingcard=nil
+ endingsong=nil
+ endcardtimer=0
  option=0
  text=""
  textdata={
@@ -44,7 +49,7 @@ function love.load()
  {"You've arrived at the large canyons that make up the Howling Cliffs.\nMan, this place is poorly named.\nYou can see a shortcut down a steep ledge, but it looks like you need some kinda rope to get down.\nThere's always the other path down, but you fear that taking too long will be your downfall.",0},
  --16
  {"So, which path?",1,{"Cliff",17},{"Longcut",26}},
- --17
+ --17                                                                                                                                                                                                     Remember this.
  {"You have reached the cliff.",3,0,19},
  --18
  {"However, you don't have anything to CLIMB,\nyou gosh darned idiot!",4,26}, -- 18
@@ -89,7 +94,7 @@ function love.load()
  --38
  {"You flee. This isn't your problem, right? You're not a hero.\nSurely some hero will come to stop this madness, right?",0},
  --39
- {"Unfortunately, a hero HAS come. And they are the angel of\ndeath that will destroy all life if unopposed.",6,B},
+ {"Unfortunately, a hero HAS come. And they are the angel of\ndeath that will destroy all life if unopposed.",6,'B'},
  --40
  {"You arrive at the guards post, or at-least what's left of it.\nLining the walls are racks full of weapons engraved with Stars!\nOr at-least what's left of them.",2,4},
  --41
@@ -105,7 +110,7 @@ function love.load()
  --46
  {"Drawing your-",3,4,53},
  --47
- {"Wait, you didn't bring a weapon.\nThat was a really big mistake.\nYou showed up to a swordfight without a weapon?",4,55},
+ {"Wait, you didn't bring a weapon.\n\nYou showed up to a swordfight without a weapon.",4,55},
  --48
  {"Drawing your sword, you know you're more skilled than him.\nHe's only a fisherman, after-all.",0},
  --49
@@ -115,14 +120,14 @@ function love.load()
  --51
  {"\n\nYou pierce the eye of the weapon with your own.\nShards like that of Stars begin to fly.",7},
  --52
- {"Sure these shards look pretty evil, but they're just shards, right?\nShards can't do anything on their own.\n\n...right?",6,A},
+ {"Sure these shards look pretty evil, but they're just shards, right?\nShards can't do anything on their own.\n\n...right?",6,'A'},
  --53
  {"Oh, right, you brought a dagger.\nWelp, this is going to be lot harder, but you can still win.",0},
  --54
  {"Your fight with the false hero begins.\nYou get sliced a bit, but it's nothing you can't handle.\nDespite being heavily wounded, you come out on top.",4,51},
  --55
- {"You get wiped on the floor like a mop.\nFragged, even.\n\nNow there's no one left to stop death incarnate.",6,B},
- --56 / Route 2 AKA "Goin' Down The Fast Way"
+ {"You are decimated.\nYour body isn't even recognizable.\n\nNow there's no one left to stop death incarnate.",6,'B'},
+ --56 / Route 2
  {"You head down the road back to the river.\nYou don't have time for this.\nDown the river you see it,\nthe sword. Being held by none other than a poor fisher boy,\nlistening to all the lies in the world.",0},
  --57
  {"Thank goodness! You can stop this before it's too late!",1,{"Wave him down",58},{"Run. Fast.",66}},
@@ -141,7 +146,7 @@ function love.load()
  --64
  {"You explain the situation calmly and you destroy the sword.\nThat was surprisingly easy!",0},
  --65
- {"Shattering the eye, bits of shard come out.\nVery evil shards.\nVery IMMOBILE evil shards.\n\nYou're done! And nothing will ever go wrong again...?",6,A},
+ {"Shattering the eye, bits of shard come out.\nVery evil shards.\nVery IMMOBILE evil shards.\n\nYou're done! And nothing will ever go wrong again...?",6,'A'},
  --66
  {"You try to run to the raft. This understandibly freaks the boy out a little,\nwho then decides to row the boat a little faster.\nSucks to suck, because you're faster than a boy on a raft.",0},
  --67
@@ -153,13 +158,13 @@ function love.load()
  --70
  {"Of course. The only way to make sure it's done for good is to destroy the core.\nWith the soul in your heart and the sole in your shoe, you crush the thing that plagues humanity.",0},
  --71
- {"You've done it. You've got your retribution.\n\nBut is it really over...?",6,A},
+ {"You've done it. You've got your retribution.\n\nBut is it really over...?",6,'A'},
  --72
  {"There might be no *REAL* way to destroy it for good,\nbut perhaps there's a way to seal it away for a very long time...?",0},
  --73
  {"With the help of funding from some nearby lords and a lot of shovels, you dig far into the earth.\nNot satisfied with just putting it in a hole, you make sure to add some cool traps,\njust in-case some future Star graverobber finds this place and mistakes it for a tomb.",0},
  --74
- {"That's the end for this evil artifact.\n\nRight???",6,A},
+ {"That's the end for this evil artifact.\n\nRight???",6,'A'},
  --75
  {"You try to yank the sword away.\nDarnit, this kid's agile. Damn the power of bright young heroes!\nYou need to do something about this.",1,{"Destroy the Sword",77},{"Use the move 'agility'",76}},
  --76
@@ -171,13 +176,41 @@ function love.load()
  --79
  {"Wait a sec! According to the manual, with the pure amount of things you have, you can summon\nStuffatron to stomp the sword and have your TRUE retribution!",0},
  --80
- {"Stuff in-hand, like some kind of mystical serpent spheres, the collide into an ultimate\nblackhole and summon Stuffatron. Twarsmyier is destroyed and all is peaceful.\nDon't ask what the implications of a gundam mech in a medieval world is, alright?\nI don't make the rules.",6,D},
+ {"Stuff in-hand, like some kind of mystical serpent spheres, the collide into an ultimate\nblackhole and summon Stuffatron. Twarsmyier is destroyed and all is peaceful.\nDon't ask what the implications of an anime mech in a medieval world is, alright?\nI don't make the rules.",6,'D'},
  --81
  {"Well that was a fun game. Your computer is still broken, though. There's this weird black rectangle taking up\nthe entire top half of the screen. Thankfully, you've called some repairmen, and they're set to arrive soon.",0},
  --82
  {"Oh! Well that was quick!\nSome cyborg looking dude and some other guy just came in and fixed your computer at a very high speed!\nWhat great repairmen! You should call them again!",0},
  --83
- {"Welp, that's that.\n\nSay, where did this shiny weird hard-drive come from?",6,C},
+ {"Welp, that's that.\n\nSay, where did this shiny weird hard-drive come from?",6,'C'},
+ --84
+ {"Dummy",0},
+ --85
+ {"Dummy",0},
+ --86
+ {"Dummy",0},
+ --87
+ {"Dummy",0},
+ --88
+ {"Dummy",0},
+ --89
+ {"Dummy",0},
+ --90
+ {"Dummy",0},
+ --91
+ {"Dummy",0},
+ --92
+ {"Dummy",0},
+ --93
+ {"Dummy",0},
+ 
+                                                                                                                                                     {'hey, can you hear me? where is this?'},
+                                                                                                                                                     {'i cant see anything, and im kind fo scared.'},
+                                                                                                                                                     {'i cant feel a wall or anything either. can someone hear me?'},
+                                                                                                                                                     {'turn on the lightswitch!'},
+                                                                                                                                                     {'...'},
+                                                                                                                                                     {'anyone?'},
+                                                                                                                                                     {'...please?'}, -- Can someone do better of keeping this guy out of the code? He's messing it all up.
  }
 
  text=textdata[1][1]
@@ -189,12 +222,24 @@ function love.load()
  "Time",
  "Platinum Drive",
  "Dagger",
- "Twarsmyier"
+ "Twarsmyier",
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ "Terminal Key"
  }
 
  spaceKeyDown=false
- leftKeyDown=false
- rightKeyDown=false
+ --leftKeyDown=false
+ --rightKeyDown=false
 end
 
 function love.update()
@@ -203,7 +248,7 @@ function love.update()
   rightKey=love.keyboard.isDown('right','d')
   stupidassKey=love.keyboard.isDown('`')
 
-  if spaceKey then
+  if spaceKey and not ending then
 
     if spaceKeyDown==false then
       if textdata[textline][2]==0 then
@@ -242,7 +287,29 @@ function love.update()
           text=textdata[textline][1]
         end
       elseif textdata[textline][2]==6 then
-
+		ending=true
+		if textdata[textline][3]=='A' then
+			endingsong = love.audio.newSource("endings/Our Victory I Guess.ogg", "static")
+			endingcard = love.graphics.newImage("endings/endingA.png")
+			endcardtimer = -600
+			endingtimer = 720
+		elseif textdata[textline][3]=='B' then
+			endingsong = love.audio.newSource("endings/Our Regrets.ogg", "static")
+			endingcard = love.graphics.newImage("endings/endingB.png")
+			endcardtimer = -600
+			endingtimer = 720
+		elseif textdata[textline][3]=='C' then
+			endingsong = love.audio.newSource("endings/Our final Truth.ogg", "static")
+			endingcard = love.graphics.newImage("endings/endingC.png")
+			endcardtimer = -366
+			endingtimer = 366
+		elseif textdata[textline][3]=='D' then
+			endingsong = love.audio.newSource("endings/True Victory.ogg", "static")
+			endingcard = love.graphics.newImage("endings/endingD.png")
+			endcardtimer = -600
+			endingtimer = 720
+		end
+		endingsong:play()
       elseif textdata[textline][2]==7 then
         p.stars=p.stars+1
         if p.stars == 3 then
@@ -271,25 +338,49 @@ function love.update()
       text=textdata[textline][1]
     end
   end
-
+	
+	if ending then
+		endingtimer = endingtimer - 1
+		if endcardtimer < 0 then
+			endcardtimer = endcardtimer + 1
+		end
+		local hit=false
+		if platenddone==false then
+			for i=1,#p.stuff do
+			  if p.stuff[i]==3 then
+				hit=true
+			  end
+			end
+		end
+		if endingtimer <= 0 and hit then
+			platenddone=true
+			textline=81
+			text=textdata[textline][1]
+			ending=false
+		end
+	end
 end
 
 function love.draw()
-  love.graphics.setColor(1,1,1)
-  love.graphics.rectangle('line', 2, 366, 508, 120)
-  love.graphics.print(text, 4, 368)
-  if #p.stuff > 0 then
-    love.graphics.print("Your things:",2,2)
-    for i=1,#p.stuff do
-      love.graphics.print(itemnames[p.stuff[i]+1],2,i*16+2)
-    end
-  end
-  if textdata[textline][2]==1 then
-    if option==0 then love.graphics.setColor(1,1,0) else love.graphics.setColor(1,1,1) end
-    love.graphics.rectangle('line', 126, 244, 128, 32)
-    love.graphics.print(textdata[textline][3][1], 190-(#textdata[textline][3][1]*3), 252)
-    if option==1 then love.graphics.setColor(1,1,0) else love.graphics.setColor(1,1,1) end
-    love.graphics.rectangle('line', 258, 244, 128, 32)
-    love.graphics.print(textdata[textline][4][1], 322-(#textdata[textline][3][1]*3), 252)
-  end
+	if not ending then
+		love.graphics.setColor(1,1,1)
+		love.graphics.rectangle('line', 2, 366, 508, 120)
+		love.graphics.print(text, 4, 368)
+		if #p.stuff > 0 then
+			love.graphics.print("Your things:",2,2)
+			for i=1,#p.stuff do
+			love.graphics.print(itemnames[p.stuff[i]+1],2,i*16+2)
+			end
+		end
+		if textdata[textline][2]==1 then
+			if option==0 then love.graphics.setColor(1,1,0) else love.graphics.setColor(1,1,1) end
+			love.graphics.rectangle('line', 126, 244, 128, 32)
+			love.graphics.print(textdata[textline][3][1], 190-(#textdata[textline][3][1]*3), 252)
+			if option==1 then love.graphics.setColor(1,1,0) else love.graphics.setColor(1,1,1) end
+			love.graphics.rectangle('line', 258, 244, 128, 32)
+			love.graphics.print(textdata[textline][4][1], 322-(#textdata[textline][3][1]*3), 252)
+		end
+	else
+		love.graphics.draw(endingcard,0,endcardtimer)
+	end
 end
