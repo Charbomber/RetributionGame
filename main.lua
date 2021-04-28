@@ -72,41 +72,41 @@ function love.load()
  --25
  {"Thankfully, swords make for unsurprisingly good machetes!\nYou head on through with little issue.",4,56}, -- 25
  --26
- {"Welp, now you can just take your time. It's not like you were in a hurry.\nOh wait, you are!",2,2}, -- 26
+ {"Welp, now you can just take your time.\nIt's not like you were in a hurry.\nOh wait, you are!",2,2}, -- 26
  --27
- {"You hurry down the path back to the river. There's blood in the water.\nAs you continue down the stream, you notice even more blood...\nand an occasional fish corpse, gutted.\nThat's not good.",0}, -- 27
+ {"You hurry down the path back to the river. There's blood in the\nwater. As you continue down the stream, you notice even more\nblood... and an occasional fish corpse, gutted.\nThat's not good.",0}, -- 27
  --28
  {"You COULD try to make a raft, but you would\nneed wood (which you get with something sharp) and rope,\nbut you're missing one of those.",0},
  --29
- {"Thankfully, as if the Stars aligned, there's a raft parked right by the shore here!\nWith fresh footprints walking away from it?\nHeaded towards a town... oh no.",7},
+ {"Thankfully, as if the Stars aligned, there's a raft parked\nright by the shore here! With fresh footprints walking\naway from it? Headed towards a town...\noh no.",7},
  --30
- {"You need to stop this. But how?",1,{"Stop this head-on!",31},{"Sneak attack!",40}}, -- 30
+ {"You need to stop this. But how?",1,{"Head-on!",31},{"Sneak attack!",40}}, -- 30
  --31
- {"Right. The only way to stop this is charging right through the front-gate\nYou walk through.",0},
+ {"Right. The only way to stop this is charging right through the\nfront-gate!\nYou walk through.",0},
  --32
- {"You're too late. Houses are burning, blood runs through the streets.\nIt's a massacre.",0},
+ {"You're too late. Houses are burning, blood runs through the\nstreets.\nIt's a massacre.",0},
  --33
- {"Here he is. The man behind all of this carnage. In his hand is a distinct steel sword, with an eye in the hilt.\nThis fight will determine the fate of the world.\nAre you ready?",1,{"No.",34},{"Yes.",45}}, -- 33
+ {"Here he is. The man behind all of this carnage. In his hand is a\ndistinct steel sword, with an eye in the hilt.\nThis fight will determine the fate of the world.\nAre you ready?",1,{"No.",34},{"Yes.",45}}, -- 33
  --34
  {"You're right.",3,1,37},
  --35
  {"You don't even have a weapon!",0},
  --36
- {"Before he can see you, you're already ducked behind some rubble.\nThankfully, there's a broken-down guards post nearby. You can probably get a spear or something there.",4,40}, -- 36
+ {"Before he can see you, you're already ducked behind some\nrubble. Thankfully, there's a broken-down guards post nearby.\nYou can probably get a spear or something there.",4,40}, -- 36
  --37
- {"You can't do this.\nYou're no hero anymore, right? He's the one with the hero's sword.",0}, -- 37
+ {"You can't do this.\nYou're no hero anymore, right?\nHe's the one with the hero's sword.",0}, -- 37
  --38
- {"You flee. This isn't your problem, right? You're not a hero.\nSurely some starry-eyed hero will come to stop this madness, right?",7},
+ {"You flee. This isn't your problem, right? You're not a hero.\nSurely some starry-eyed hero will come to stop this madness,\nright?",7},
  --39
  {"Unfortunately, a hero HAS come. And they are the angel of\ndeath that will destroy all life if unopposed.",6,'B'},
  --40
  {"You arrive at the guards post, or at-least what's left of it.\nLining the walls are racks full of weapons engraved with Stars!\nOr at-least what's left of them.",2,4},
  --41
- {"The only weapon left in the rubble is a lone and resistant dagger.\nYou take it.",7},
+ {"The only weapon left in the rubble is a lone\nand resistant dagger.\nYou take it.",7},
  --42
  {"Now that you have a weapon, it's time to face him.",0},
  --43
- {"Here he is. The man behind all of this carnage. In his hand is a distinct steel sword, with an eye in the hilt.\nThis fight will determine the fate of the world.\nAre you ready?",1,{"No.",44},{"Yes.",45}}, -- 33
+ {"Here he is. The man behind all of this carnage.\nIn his hand is a distinct steel sword, with an eye in the hilt.\nThis fight will determine the fate of the world.\nAre you ready?",1,{"No.",44},{"Yes.",45}}, -- 33
  --44
  {"You're right.",4,37},
  --45
@@ -124,7 +124,7 @@ function love.load()
  --51
  {"\n\nYou pierce the eye of the weapon with your own.\nShards like that of Stars begin to fly.",7},
  --52
- {"Sure these shards look pretty evil, but they're just shards, right?\nShards can't do anything on their own.\n\n...right?",6,'A'},
+ {"Sure these shards look pretty evil, but they're just shards,\nright?\nShards can't do anything on their own.\n\n...right?",6,'A'},
  --53
  {"Oh, right, you brought a dagger.\nWelp, this is going to be lot harder, but you can still win.",0},
  --54
@@ -182,9 +182,9 @@ function love.load()
  --80
  {"Stuff in-hand, like some kind of mystical serpent spheres, the collide into an\nultimate blackhole and summon Stuffatron. Twarsmyier is destroyed and all is\npeaceful. Don't ask what the implications of an anime mech in a medieval world\nis, alright? I don't make the rules.",6,'D'},
  --81
- {"Well that was a fun game. Your computer is still broken, though. There's this\nweird black rectangle taking up the entire top half of the screen.\nThankfully, you've called some repairmen, and they're set to arrive soon.",0},
+ {"Well that was a fun game. Your computer is still broken,\nthough. There's this weird black rectangle\ntaking up the entire top half of the screen.\nThankfully, you've called some repairmen,\nand they're set to arrive soon.",0},
  --82
- {"Oh! Well that was quick!\nSome cyborg looking dude and some other guy just came in and fixed\nyour computer at a very high speed! What great repairmen!\nYou should call them again!",0},
+ {"Oh! Well that was quick!\nSome cyborg looking dude and some other guy just came in\nand fixed your computer at a very high speed!\nWhat great repairmen!\nYou should call them again!",0},
  --83
  {"Welp, that's that.\n\nSay, where did this shiny weird hard-drive come from?",6,'C'},
  --84
