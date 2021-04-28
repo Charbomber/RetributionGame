@@ -7,7 +7,11 @@ function love.load()
  p={}
  p.stars=0
  p.stuff={}
-
+ 
+ fontmain = love.graphics.newFont("press-start.regular.ttf", 8)
+ fontinv  = love.graphics.newFont("perfect-dos.ttf", 16)
+ love.graphics.setFont(fontmain)
+ 
  ending=false
  platenddone=false
  endingtimer=0
@@ -24,29 +28,29 @@ function love.load()
  --3
  {"You have just bested the temptations of the hero's\nsword. Not satisfied, you begin to head towards the\nnearest hamlet and gather the materials needed to\ndestroy the evil sword.",0},
  --4
- {"What do you need?",1,{"Rope, of course!",5},{"A new sword!",7}},
+ {"What do you need?",1,{"Rope of course!",5},{"A new sword!",7}},
  --5
  {"Of course, of course. To pull the sword out of\nthe lake again, you need something to pull it out\nwith. Luckily, a merchant selling simple rope is\nvery close and welcome to sell.",2,0},
  --6
  {"Rope Get!",4,9},
  --7
- {"Without a sword, you don't have anything to defend yourself!\nYou quickly head to the nearest blacksmith and buy yourself a mighty sword!",2,1}, -- 7
+ {"Without a sword, you don't have anything to defend yourself!\nYou quickly head to the nearest blacksmith and buy yourself\na mighty sword!",2,1}, -- 7
  --8
- {"It's almost as if the Stars themselved are saying: 'It's dangerous to go alone,\nso you get this!'. Beautiful,",7},
+ {"It's almost as if the Stars themselved are saying:\n'It's dangerous to go alone,\nso you get this!'. Beautiful,",7},
  --9
- {"Well, you've almost forgot! You're on borrowed time!\nYou head yourself on back to the lake, to destroy this sword once and for all.",0}, -- 9
+ {"Well, you've almost forgot! You're on borrowed time!\nYou head yourself on back to the lake,\nto destroy this sword once and for all.",0}, -- 9
  --10
  {"...Holy crap.\nThe shadow in the water is gone already.\nThe sword is gone.",0}, -- 10
  --11
- {"Someone must've found it, but there are no fresh footprints here, only yours.\nSome fisherman on a raft must've found it,\nthe sword is probably already brainwashing him at this very moment.",0}, --11
+ {"Someone must've found it,\nbut there are no fresh footprints here, only yours.\nSome fisherman on a raft must've found it,\nthe sword is probably already brainwashing them at\nthis very moment.",0}, --11
  --12
- {"With this said, you should probably head downstream, since\nno one could've gotten it by walking. You need to run, and FAST.",0}, -- 12
+ {"With this said, you should probably head downstream, since\nno one could've gotten it by walking. You need to run,\nand FAST.",0}, -- 12
  --13
- {"There's a small fork in the road to the Howling Cliffs and the Mad Forest.\nWhere are you going?",1,{"Cliffs",14},{"Forest",20}}, -- 13
+ {"There's a small fork in the road to\nthe Howling Cliffs and the Mad Forest.\nWhere are you going?",1,{"Cliffs",14},{"Forest",20}}, -- 13
  --14
- {"The Howling Cliffs may be scary, but the Mad Forest is more scary. Fuck. That.\nTo the Howling Cliffs you go!",0},
+ {"The Howling Cliffs may be scary,\nbut the Mad Forest is more scary. Fuck. That.\nTo the Howling Cliffs you go!",0},
  --15
- {"You've arrived at the large canyons that make up the Howling Cliffs.\nMan, this place is poorly named.\nYou can see a shortcut down a steep ledge, but it looks like you need some kinda rope to get down.\nThere's always the other path down, but you fear that taking too long will be your downfall.",0},
+ {"You've arrived at the large canyons that make up the\nHowling Cliffs. Man, this place is poorly named.\nYou can see a shortcut down a steep ledge,\nbut it looks like you need some kinda rope\nto get down. There's always the other path down,\nbut you fear that taking too long will be your downfall.",0},
  --16
  {"So, which path?",1,{"Cliff",17},{"Longcut",26}},
  --17                                                                                                                                                                                                     Remember this.
@@ -54,15 +58,15 @@ function love.load()
  --18
  {"However, you don't have anything to CLIMB,\nyou gosh darned idiot!",4,26}, -- 18
  --19
- {"Using your rope, it was easy to get across! Now to get back on track!",4,56}, -- 19
+ {"Using your rope, it was easy to get across!\nNow to get back on track!",4,56}, -- 19
  --20
  {"The Howling Cliffs seem a little dangerous for now.\nBesides, the woods aren't too scary!",0},
  --21
- {"You've come into the Mad Forest. It's actually quite peaceful for a while,\nuntil you get to a dark patch.\nThere's an easy way AROUND this part, but it's length has something to be\ndesired.",0},
+ {"You've come into the Mad Forest. It's actually quite peaceful\nfor a while, until you get to a dark patch.\nThere's an easy way AROUND this part, but it's length\nhas something to be desired.",0},
  --22
  {"So, which path?",1,{"Scary Part",23},{"Boring Part",26}},
  --23
- {"Unfortunately, the scary part looked like a fun adventure at-first, but there are\nbrambles lining every nook and cranny. This will NOT be fun.",3,1,25}, -- 23
+ {"Unfortunately, the scary part looked like a fun adventure\nat-first, but there are brambles lining every nook and cranny.\nThis will NOT be fun.",3,1,25}, -- 23
  --24
  {"The amount of brambles you had to wade through basically made the trip through\nnot worth the shortcut. Owie.",4,26}, -- 24
  --25
@@ -92,7 +96,7 @@ function love.load()
  --37
  {"You can't do this.\nYou're no hero anymore, right? He's the one with the hero's sword.",0}, -- 37
  --38
- {"You flee. This isn't your problem, right? You're not a hero.\nSurely some hero will come to stop this madness, right?",0},
+ {"You flee. This isn't your problem, right? You're not a hero.\nSurely some starry-eyed hero will come to stop this madness, right?",7},
  --39
  {"Unfortunately, a hero HAS come. And they are the angel of\ndeath that will destroy all life if unopposed.",6,'B'},
  --40
@@ -142,27 +146,27 @@ function love.load()
  --62
  {"You try to wave him down. He waves back.\nThis isn't working.",1,{"Wave him down",63},{"Run. Fast.",66}},
  --63
- {"After all this waving, the fisher boy actually leads his raft to land\nand walks towards you like the Northern Star!\nI guess that worked out, somehow.",7},
+ {"After all this waving, the fisher boy actually leads his raft\nto land and walks towards you!\nI guess that worked out, somehow.",7},
  --64
  {"You explain the situation calmly and you destroy the sword.\nThat was surprisingly easy!",0},
  --65
  {"Shattering the eye, bits of shard come out.\nVery evil shards.\nVery IMMOBILE evil shards.\n\nYou're done! And nothing will ever go wrong again...?",6,'A'},
  --66
- {"You try to run to the raft. This understandibly freaks the boy out a little,\nwho then decides to row the boat a little faster.\nSucks to suck, because you're faster than a boy on a raft.",0},
+ {"You try to run to the raft. This understandibly freaks the boy\nout a little, who then decides to row the boat a little faster.\nSucks to suck, because you're faster than a boy on a raft.",0},
  --67
- {"When you get to the raft, the boy runs away, taking the sword with him.\n When you catch up to him, he's terrified.",1,{"Good Cop",68},{"Bad Cop",75}},
+ {"When you get to the raft, the boy runs away,\ntaking the sword with him.\nWhen you catch up to him, he's terrified.",1,{"Good Cop",68},{"Bad Cop",75}},
  --68
- {"You calmly try to relax the boy and take the sword from him. Y'know, like a normal person.",2,5},
+ {"You calmly try to relax the boy and take the sword from him.\nY'know, like a normal person.",2,5},
  --69 (nice)
- {"You've gotten Twarsmyier, the evil sword!\nNow, how to destroy it...",1,{"Crush the Eye",70},{"Bury it far underground",72}},
+ {"You've gotten Twarsmyier, the evil sword!\nNow, how to destroy it...",1,{"Crush the Eye",70},{"Bury it",72}},
  --70
  {"Of course. The only way to make sure it's done for good is to destroy the core.\nWith the soul in your heart and the sole in your shoe, you crush the thing that plagues humanity.",0},
  --71
  {"You've done it. You've got your retribution.\n\nBut is it really over...?",6,'A'},
  --72
- {"There might be no *REAL* way to destroy it for good,\nbut perhaps there's a way to seal it away for a very long time...?",0},
+ {"There might be no *REAL* way to destroy it for good,\nbut perhaps there's a way to seal it away\nfor a very long time...?",0},
  --73
- {"With the help of funding from some nearby lords and a lot of shovels, you dig far into the earth.\nNot satisfied with just putting it in a hole, you make sure to add some cool traps,\njust in-case some future Star graverobber finds this place and mistakes it for a tomb.",0},
+ {"With the help of funding from some nearby lords and a lot of\nshovels, you dig far into the earth.\nNot satisfied with just putting it in a hole, you make sure\nto add some cool traps,\njust in-case some future Star graverobber finds this place\nand mistakes it for a tomb.",0},
  --74
  {"That's the end for this evil artifact.\n\nRight???",6,'A'},
  --75
@@ -174,13 +178,13 @@ function love.load()
  --78
  {"You throw a rock at the sword.\nWith your incredible aim, you hit the sword square in the eye.",4,71},
  --79
- {"Wait a sec! According to the manual, with the pure amount of things you have, you can summon\nStuffatron to stomp the sword and have your TRUE retribution!",0},
+ {"Wait a sec! According to the manual, with the pure amount of things you have,\nyou can summon Stuffatron to stomp the sword and have your TRUE retribution!",0},
  --80
- {"Stuff in-hand, like some kind of mystical serpent spheres, the collide into an ultimate\nblackhole and summon Stuffatron. Twarsmyier is destroyed and all is peaceful.\nDon't ask what the implications of an anime mech in a medieval world is, alright?\nI don't make the rules.",6,'D'},
+ {"Stuff in-hand, like some kind of mystical serpent spheres, the collide into an\nultimate blackhole and summon Stuffatron. Twarsmyier is destroyed and all is\npeaceful. Don't ask what the implications of an anime mech in a medieval world\nis, alright? I don't make the rules.",6,'D'},
  --81
- {"Well that was a fun game. Your computer is still broken, though. There's this weird black rectangle taking up\nthe entire top half of the screen. Thankfully, you've called some repairmen, and they're set to arrive soon.",0},
+ {"Well that was a fun game. Your computer is still broken, though. There's this\nweird black rectangle taking up the entire top half of the screen.\nThankfully, you've called some repairmen, and they're set to arrive soon.",0},
  --82
- {"Oh! Well that was quick!\nSome cyborg looking dude and some other guy just came in and fixed your computer at a very high speed!\nWhat great repairmen! You should call them again!",0},
+ {"Oh! Well that was quick!\nSome cyborg looking dude and some other guy just came in and fixed\nyour computer at a very high speed! What great repairmen!\nYou should call them again!",0},
  --83
  {"Welp, that's that.\n\nSay, where did this shiny weird hard-drive come from?",6,'C'},
  --84
@@ -289,25 +293,25 @@ function love.update()
       elseif textdata[textline][2]==6 then
 		ending=true
 		if textdata[textline][3]=='A' then
-			endingsong = love.audio.newSource("endings/Our Victory I Guess.ogg", "static")
+			endingsong = love.audio.newSource("endings/Our Victory.ogg", "static")
 			endingcard = love.graphics.newImage("endings/endingA.png")
-			endcardtimer = -600
-			endingtimer = 720
+			endcardtimer = -488
+			endingtimer = 600
 		elseif textdata[textline][3]=='B' then
 			endingsong = love.audio.newSource("endings/Our Regrets.ogg", "static")
 			endingcard = love.graphics.newImage("endings/endingB.png")
 			endcardtimer = -600
-			endingtimer = 720
+			endingtimer = 1140
 		elseif textdata[textline][3]=='C' then
 			endingsong = love.audio.newSource("endings/Our final Truth.ogg", "static")
 			endingcard = love.graphics.newImage("endings/endingC.png")
 			endcardtimer = -366
-			endingtimer = 366
+			endingtimer = 1380
 		elseif textdata[textline][3]=='D' then
 			endingsong = love.audio.newSource("endings/True Victory.ogg", "static")
 			endingcard = love.graphics.newImage("endings/endingD.png")
-			endcardtimer = -600
-			endingtimer = 720
+			endcardtimer = 1
+			endingtimer = 600
 		end
 		endingsong:play()
       elseif textdata[textline][2]==7 then
@@ -332,7 +336,7 @@ function love.update()
     option=1
   end
 
-  if stupidassKey then
+  if stupidassKey and platenddone==false then
     if #p.stuff >= 3 then
       textline=79
       text=textdata[textline][1]
@@ -367,18 +371,18 @@ function love.draw()
 		love.graphics.rectangle('line', 2, 366, 508, 120)
 		love.graphics.print(text, 4, 368)
 		if #p.stuff > 0 then
-			love.graphics.print("Your things:",2,2)
+			love.graphics.print("Your things:",fontinv,2,2)
 			for i=1,#p.stuff do
-			love.graphics.print(itemnames[p.stuff[i]+1],2,i*16+2)
+			love.graphics.print(itemnames[p.stuff[i]+1],fontinv,2,i*16+2)
 			end
 		end
 		if textdata[textline][2]==1 then
 			if option==0 then love.graphics.setColor(1,1,0) else love.graphics.setColor(1,1,1) end
 			love.graphics.rectangle('line', 126, 244, 128, 32)
-			love.graphics.print(textdata[textline][3][1], 190-(#textdata[textline][3][1]*3), 252)
+			love.graphics.print(textdata[textline][3][1], fontmain, 190-fontmain:getWidth(textdata[textline][3][1])/2, 252)
 			if option==1 then love.graphics.setColor(1,1,0) else love.graphics.setColor(1,1,1) end
 			love.graphics.rectangle('line', 258, 244, 128, 32)
-			love.graphics.print(textdata[textline][4][1], 322-(#textdata[textline][3][1]*3), 252)
+			love.graphics.print(textdata[textline][4][1], fontmain, 322-fontmain:getWidth(textdata[textline][4][1])/2, 252)
 		end
 	else
 		love.graphics.draw(endingcard,0,endcardtimer)
