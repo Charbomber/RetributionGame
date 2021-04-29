@@ -8,8 +8,8 @@ function love.load()
  p.stars=0
  p.stuff={}
  
- fontmain = love.graphics.newFont("press-start.regular.ttf", 8)
- fontinv  = love.graphics.newFont("perfect-dos.ttf", 16)
+ fontmain = love.graphics.newFont("main.ttf", 8)
+ fontinv  = love.graphics.newFont("inv.ttf", 16)
  love.graphics.setFont(fontmain)
  
  ending=false
@@ -36,7 +36,7 @@ function love.load()
  --7
  {"Without a sword, you don't have anything to defend yourself!\nYou quickly head to the nearest blacksmith and buy yourself\na mighty sword!",2,1}, -- 7
  --8
- {"It's almost as if the Stars themselved are saying:\n'It's dangerous to go alone,\nso you get this!'. Beautiful,",7},
+ {"It's almost as if the Stars themselves are saying:\n'It's dangerous to go alone,\nso you get this!'. Beautiful.",7},
  --9
  {"Well, you've almost forgot! You're on borrowed time!\nYou head yourself on back to the lake,\nto destroy this sword once and for all.",0}, -- 9
  --10
@@ -110,7 +110,7 @@ function love.load()
  --44
  {"You're right.",4,37},
  --45
- {"This is the final fight.",3,1,47},
+ {"This is the final fight.",3,1,48},
  --46
  {"Drawing your-",3,4,53},
  --47
@@ -158,7 +158,7 @@ function love.load()
  --68
  {"You calmly try to relax the boy and take the sword from him.\nY'know, like a normal person.",2,5},
  --69 (nice)
- {"You've gotten Twarsmyier, the evil sword!\nNow, how to destroy it...",1,{"Crush the Eye",70},{"Bury it",72}},
+ {"You've gotten Forlorn, the evil sword!\nNow, how to destroy it...",1,{"Crush the Eye",70},{"Bury it",72}},
  --70
  {"Of course. The only way to make sure it's done for good is to destroy the core.\nWith the soul in your heart and the sole in your shoe, you crush the thing that plagues humanity.",0},
  --71
@@ -174,7 +174,7 @@ function love.load()
  --76
  {"That's not a real option, player! Choose something real!",4,75},
  --77
- {"That's right! Just because you need to destroy the sword doesn't mean you have to\ndetach the child, first!",0},
+ {"That's right! Just because you need to destroy the sword doesn't mean you have\nto detach the child, first!",0},
  --78
  {"You throw a rock at the sword.\nWith your incredible aim, you hit the sword square in the eye.",4,71},
  --79
@@ -226,7 +226,7 @@ function love.load()
  "Time",
  "Platinum Drive",
  "Dagger",
- "Twarsmyier",
+ "Forlorn",
  
  
  
