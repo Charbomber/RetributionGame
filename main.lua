@@ -1,7 +1,7 @@
 -- Retribution
 -- Notes:
 -- Page Types: 0 - Continue / 1 - Yes or No / 2 - Item Get / 3 - Item Jump / 4 - Jump / 5 - Item Count Jump (Unused) / 6 - Ending / 7 - ???
--- Items: 0 - Rope / 1 - Sword / 2 - Time / 3 - Platinum Drive / 4 - Dagger / 5 - Twarsmyier / 6 - 
+-- Items: 0 - Rope / 1 - Sword / 2 - Time / 3 - Platinum Drive / 4 - Dagger / 5 - Forlorn / 6 - 
 
 function love.load()
  p={}
